@@ -7,7 +7,7 @@ A backend API service that analyzes GitHub user profiles using the GitHub REST A
 # Live API
 
 ```bash
-https://your-deployed-api-url.com
+https://github-profile-analyzer-w5d1.onrender.com
 ```
 
 ---
@@ -15,7 +15,7 @@ https://your-deployed-api-url.com
 # GitHub Repository
 
 ```bash
-https://github.com/your-username/github-profile-analyzer-api
+https://github.com/Sukumar5705/github-profile-analyzer
 ```
 
 ---
@@ -46,14 +46,14 @@ https://github.com/your-username/github-profile-analyzer-api
 | MySQL | Database |
 | GitHub REST API | Third-party API |
 | Railway MySQL | Cloud database |
-| Render/Railway | Deployment |
+| Render | Deployment |
 
 ---
 
 # Project Structure
 
 ```bash
-github-profile-analyzer-api/
+github-profile-analyzer/
 │
 ├── config/
 │   └── db.js
@@ -78,7 +78,9 @@ github-profile-analyzer-api/
 ├── app.js
 ├── package.json
 ├── package-lock.json
-└── README.md
+├── README.md
+├── database_schema.sql
+└── github-profile-analyzer-postman-collection.json
 ```
 
 ---
@@ -88,7 +90,7 @@ github-profile-analyzer-api/
 ## Clone Repository
 
 ```bash
-git clone https://github.com/your-username/github-profile-analyzer-api.git
+git clone https://github.com/Sukumar5705/github-profile-analyzer.git
 ```
 
 ---
@@ -96,7 +98,7 @@ git clone https://github.com/your-username/github-profile-analyzer-api.git
 ## Navigate To Project
 
 ```bash
-cd github-profile-analyzer-api
+cd github-profile-analyzer
 ```
 
 ---
@@ -117,12 +119,15 @@ Create a `.env` file in the root directory.
 PORT=5000
 
 DATABASE_URL=your_mysql_connection_url
+
+GITHUB_TOKEN=your_github_token
 ```
 
 Example:
 
 ```env
 DATABASE_URL=mysql://username:password@host:3306/database
+GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxx
 ```
 
 ---
@@ -165,6 +170,12 @@ POST /api/github/analyze/:username
 POST /api/github/analyze/octocat
 ```
 
+## Live Example
+
+```http
+https://github-profile-analyzer-w5d1.onrender.com/api/github/analyze/octocat
+```
+
 ## Example Response
 
 ```json
@@ -193,23 +204,16 @@ Fetch all analyzed profiles.
 GET /api/github/profiles
 ```
 
+## Live Example
+
+```http
+https://github-profile-analyzer-w5d1.onrender.com/api/github/profiles
+```
+
 ## Pagination Example
 
 ```http
 GET /api/github/profiles?page=1&limit=5
-```
-
-## Example Response
-
-```json
-{
-  "success": true,
-  "currentPage": 1,
-  "totalPages": 2,
-  "totalProfiles": 10,
-  "count": 5,
-  "data": []
-}
 ```
 
 ---
@@ -230,6 +234,12 @@ GET /api/github/profiles/:username
 GET /api/github/profiles/octocat
 ```
 
+## Live Example
+
+```http
+https://github-profile-analyzer-w5d1.onrender.com/api/github/profiles/octocat
+```
+
 ---
 
 # 4. Search Profiles
@@ -240,6 +250,12 @@ Search analyzed profiles using username.
 
 ```http
 GET /api/github/search?username=oct
+```
+
+## Live Example
+
+```http
+https://github-profile-analyzer-w5d1.onrender.com/api/github/search?username=oct
 ```
 
 ## Example Response
@@ -331,11 +347,20 @@ The API handles:
 Backend deployed using:
 
 - Render
-- Railway
 
 Cloud Database:
 
 - Railway MySQL
+
+---
+
+# Postman Collection
+
+The repository includes:
+
+```bash
+github-profile-analyzer-postman-collection.json
+```
 
 ---
 
@@ -354,6 +379,9 @@ Cloud Database:
 # Author
 
 Sukumar Erugadindla
+
+GitHub:
+https://github.com/Sukumar5705
 
 ---
 
