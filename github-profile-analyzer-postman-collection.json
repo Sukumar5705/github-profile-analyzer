@@ -1,0 +1,161 @@
+{
+  "info": {
+    "name": "GitHub Profile Analyzer API",
+    "_postman_id": "8c6d9a1b-1234-5678-9012-abcdef123456",
+    "description": "Postman collection for GitHub Profile Analyzer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Analyze GitHub Profile",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "https://github-profile-analyzer-w5d1.onrender.com/api/github/analyze/octocat",
+          "protocol": "https",
+          "host": [
+            "github-profile-analyzer-w5d1",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "github",
+            "analyze",
+            "octocat"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Profiles",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://github-profile-analyzer-w5d1.onrender.com/api/github/profiles",
+          "protocol": "https",
+          "host": [
+            "github-profile-analyzer-w5d1",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "github",
+            "profiles"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Profiles With Pagination",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://github-profile-analyzer-w5d1.onrender.com/api/github/profiles?page=1&limit=5",
+          "protocol": "https",
+          "host": [
+            "github-profile-analyzer-w5d1",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "github",
+            "profiles"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Single Profile",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://github-profile-analyzer-w5d1.onrender.com/api/github/profiles/octocat",
+          "protocol": "https",
+          "host": [
+            "github-profile-analyzer-w5d1",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "github",
+            "profiles",
+            "octocat"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search Profiles",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://github-profile-analyzer-w5d1.onrender.com/api/github/search?username=oct",
+          "protocol": "https",
+          "host": [
+            "github-profile-analyzer-w5d1",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "github",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "username",
+              "value": "oct"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Profile",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://github-profile-analyzer-w5d1.onrender.com/api/github/profiles/octocat",
+          "protocol": "https",
+          "host": [
+            "github-profile-analyzer-w5d1",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "github",
+            "profiles",
+            "octocat"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
