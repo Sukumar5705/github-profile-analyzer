@@ -1,390 +1,453 @@
-# GitHub Profile Analyzer API
+# Developer Intelligence Platform
 
-A backend API service that analyzes GitHub user profiles using the GitHub REST API and stores useful profile insights in a MySQL database.
+### AI-Powered GitHub Portfolio Analysis, Recruiter Insights & Career Growth Engine
 
----
+Developer Intelligence Platform is a full-stack analytics platform that transforms GitHub profiles into actionable career insights.
 
-# Live API
-
-```bash
-https://github-profile-analyzer-w5d1.onrender.com
-```
+Unlike traditional GitHub analytics tools that only display statistics such as stars, repositories, and followers, this platform analyzes a developer's portfolio to identify technical strengths, evaluate project quality, detect portfolio gaps, generate recruiter-focused feedback, and create personalized career roadmaps.
 
 ---
 
-# GitHub Repository
+## Key Features
 
-```bash
-https://github.com/Sukumar5705/github-profile-analyzer
-```
+### GitHub Profile Analysis
 
----
+Analyze any public GitHub profile and collect:
 
-# Features
-
-- Analyze GitHub user profiles
-- Fetch public GitHub profile data
-- Fetch repository statistics
-- Store analyzed profiles in MySQL
-- Calculate useful insights
-- Get all analyzed profiles
-- Get single analyzed profile
-- Search profiles
-- Pagination support
-- Delete stored profiles
-- Error handling
-- Cloud MySQL integration
+* Profile information
+* Repository statistics
+* Language usage
+* Stars and forks
+* Account activity
+* Repository metadata
 
 ---
 
-# Tech Stack
+### Skill Extraction Engine
 
-| Technology | Purpose |
-|------------|----------|
-| Node.js | Backend runtime |
-| Express.js | API framework |
-| MySQL | Database |
-| GitHub REST API | Third-party API |
-| Railway MySQL | Cloud database |
-| Render | Deployment |
+Automatically identifies technical skills from:
 
----
-
-# Project Structure
-
-```bash
-github-profile-analyzer/
-│
-├── config/
-│   └── db.js
-│
-├── controllers/
-│   └── githubController.js
-│
-├── middleware/
-│   └── errorHandler.js
-│
-├── routes/
-│   └── githubRoutes.js
-│
-├── services/
-│   └── githubService.js
-│
-├── utils/
-│   └── analyzer.js
-│
-├── .env
-├── .gitignore
-├── app.js
-├── package.json
-├── package-lock.json
-├── README.md
-├── database_schema.sql
-└── github-profile-analyzer-postman-collection.json
-```
-
----
-
-# Installation
-
-## Clone Repository
-
-```bash
-git clone https://github.com/Sukumar5705/github-profile-analyzer.git
-```
-
----
-
-## Navigate To Project
-
-```bash
-cd github-profile-analyzer
-```
-
----
-
-## Install Dependencies
-
-```bash
-npm install
-```
-
----
-
-# Environment Variables
-
-Create a `.env` file in the root directory.
-
-```env
-PORT=5000
-
-DATABASE_URL=your_mysql_connection_url
-
-GITHUB_TOKEN=your_github_token
-```
+* Repository names
+* Descriptions
+* Topics
+* Languages
+* README content
 
 Example:
 
-```env
-DATABASE_URL=mysql://username:password@host:3306/database
-GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxx
+```text
+Node.js
+Express.js
+MySQL
+React
+Docker
+AWS
+Redis
 ```
 
 ---
 
-# Run Project
+### Developer Type Classification
 
-## Development Mode
+Classifies developers into professional roles such as:
 
-```bash
-npm run dev
+* Backend Developer
+* Frontend Developer
+* Full Stack Developer
+* AI Engineer
+* DevOps Engineer
+* Mobile Developer
+
+Each classification includes confidence scoring and supporting evidence.
+
+---
+
+### Career Readiness Score
+
+Evaluates portfolio quality using multiple dimensions:
+
+* Documentation Quality
+* Project Diversity
+* Technical Breadth
+* Deployment Evidence
+* Open Source Contributions
+* Activity Consistency
+
+Example:
+
+```text
+Career Readiness Score: 84/100
 ```
 
 ---
 
-## Production Mode
+### Project Intelligence Engine
 
-```bash
-npm start
+Ranks repositories using multiple quality signals:
+
+* Documentation
+* Technical Complexity
+* Repository Activity
+* Community Engagement
+* Technology Stack
+
+Automatically identifies:
+
+* Best Resume Project
+* Best Technical Project
+* Best Architecture Project
+* Most Recruiter-Friendly Project
+
+---
+
+### Portfolio Gap Analysis
+
+Detects missing areas in a developer portfolio.
+
+Examples:
+
+* Testing
+* Docker
+* CI/CD
+* Cloud Deployment
+* Authentication
+* Open Source Contributions
+* System Design
+
+Provides actionable recommendations for improvement.
+
+---
+
+### Recruiter View
+
+Generates recruiter-focused insights including:
+
+* Technical strengths
+* Areas for improvement
+* Top projects
+* Career readiness assessment
+* Hiring recommendations
+
+Example:
+
+```text
+Strong Backend Development Experience
+
+Good API Design Knowledge
+
+Needs More Cloud Exposure
+
+Recommended for Entry-Level Backend Roles
 ```
 
 ---
 
-# API Endpoints
+### Resume Evidence Engine
+
+Converts GitHub activity into measurable resume evidence.
+
+Example:
+
+```text
+Backend Development
+
+Evidence:
+
+• Built 8 REST API projects
+• Used relational databases in 5 repositories
+• Implemented authentication in 3 applications
+```
 
 ---
 
-# 1. Analyze GitHub Profile
+### AI-Powered Portfolio Review
 
-Analyze a GitHub profile and store insights in the database.
+Using Gemini AI, the platform generates:
 
-## Endpoint
+* Professional developer summaries
+* Portfolio reviews
+* Personalized learning roadmaps
+* Career recommendations
+* Resume-ready bullet points
+
+---
+
+### Learning Roadmap Generator
+
+Creates personalized growth plans based on:
+
+* Existing skills
+* Portfolio gaps
+* Career goals
+* Developer classification
+
+Example:
+
+```text
+Month 1
+Docker
+Testing
+
+Month 2
+Redis
+AWS
+
+Month 3
+System Design
+Microservices
+```
+
+---
+
+## System Architecture
+
+```text
+GitHub Username
+        │
+        ▼
+GitHub API
+        │
+        ▼
+Developer Intelligence Platform
+        │
+        ├── Skill Extraction Engine
+        ├── Project Ranking Engine
+        ├── Career Score Engine
+        ├── Gap Analysis Engine
+        ├── Recruiter Analysis Engine
+        ├── Resume Evidence Engine
+        └── AI Insight Engine
+        │
+        ▼
+MySQL Database
+        │
+        ▼
+Developer Intelligence Report
+```
+
+---
+
+## Tech Stack
+
+### Frontend
+
+* React
+* TypeScript
+* Tailwind CSS
+* shadcn/ui
+* Recharts
+
+### Backend
+
+* Node.js
+* Express.js
+* Axios
+* Zod
+* Winston
+
+### Database
+
+* MySQL
+* Railway
+
+### AI
+
+* Gemini AI API
+
+### External APIs
+
+* GitHub REST API
+
+### Deployment
+
+* Vercel
+* Render
+* Railway
+
+---
+
+## Backend Architecture
+
+```text
+src/
+
+├── config/
+├── controllers/
+├── routes/
+├── services/
+├── analyzers/
+├── repositories/
+├── middleware/
+├── validations/
+├── prompts/
+├── utils/
+├── app.js
+└── server.js
+```
+
+---
+
+## Core Analysis Pipeline
+
+```text
+GitHub Profile
+      │
+      ▼
+Repository Collection
+      │
+      ▼
+Skill Extraction
+      │
+      ▼
+Developer Classification
+      │
+      ▼
+Project Ranking
+      │
+      ▼
+Career Score Calculation
+      │
+      ▼
+Portfolio Gap Analysis
+      │
+      ▼
+Recruiter Evaluation
+      │
+      ▼
+Resume Evidence Generation
+      │
+      ▼
+AI Insights & Roadmap
+      │
+      ▼
+Final Developer Intelligence Report
+```
+
+---
+
+## API Endpoints
+
+### Analyze Profile
 
 ```http
-POST /api/github/analyze/:username
+POST /api/analyze/:username
 ```
 
-## Example
+Runs the complete developer intelligence pipeline.
+
+---
+
+### Profile Information
 
 ```http
-POST /api/github/analyze/octocat
+GET /api/profile/:username
 ```
 
-## Live Example
+---
+
+### Skills
 
 ```http
-https://github-profile-analyzer-w5d1.onrender.com/api/github/analyze/octocat
-```
-
-## Example Response
-
-```json
-{
-  "success": true,
-  "message": "Profile analyzed successfully",
-  "data": {
-    "username": "octocat",
-    "followers": 10000,
-    "publicRepos": 8,
-    "totalStars": 250,
-    "mostUsedLanguage": "JavaScript"
-  }
-}
+GET /api/skills/:username
 ```
 
 ---
 
-# 2. Get All Profiles
-
-Fetch all analyzed profiles.
-
-## Endpoint
+### Top Projects
 
 ```http
-GET /api/github/profiles
+GET /api/projects/top/:username
 ```
 
-## Live Example
+---
+
+### Career Score
 
 ```http
-https://github-profile-analyzer-w5d1.onrender.com/api/github/profiles
+GET /api/career-score/:username
 ```
 
-## Pagination Example
+---
+
+### Recruiter View
 
 ```http
-GET /api/github/profiles?page=1&limit=5
+GET /api/recruiter/:username
 ```
 
 ---
 
-# 3. Get Single Profile
-
-Fetch one analyzed profile by username.
-
-## Endpoint
+### AI Insights
 
 ```http
-GET /api/github/profiles/:username
-```
-
-## Example
-
-```http
-GET /api/github/profiles/octocat
-```
-
-## Live Example
-
-```http
-https://github-profile-analyzer-w5d1.onrender.com/api/github/profiles/octocat
+POST /api/analysis/:username/generate-ai
 ```
 
 ---
 
-# 4. Search Profiles
+## Example Use Cases
 
-Search analyzed profiles using username.
+### For Students
 
-## Endpoint
+* Improve portfolio quality
+* Identify missing projects
+* Prepare for placements
+* Build stronger resumes
 
-```http
-GET /api/github/search?username=oct
-```
+### For Recruiters
 
-## Live Example
+* Quickly assess developer profiles
+* Identify strengths and weaknesses
+* Review top projects
+* Generate hiring insights
 
-```http
-https://github-profile-analyzer-w5d1.onrender.com/api/github/search?username=oct
-```
+### For Developers
 
-## Example Response
-
-```json
-{
-  "success": true,
-  "count": 1,
-  "data": [
-    {
-      "username": "octocat"
-    }
-  ]
-}
-```
+* Track growth
+* Discover portfolio gaps
+* Plan learning paths
+* Improve professional branding
 
 ---
 
-# 5. Delete Profile
+## Future Enhancements
 
-Delete a stored profile from the database.
-
-## Endpoint
-
-```http
-DELETE /api/github/profiles/:username
-```
-
----
-
-# Database Schema
-
-```sql
-CREATE TABLE profiles (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    username VARCHAR(255) UNIQUE NOT NULL,
-    name VARCHAR(255),
-    bio TEXT,
-
-    public_repos INT DEFAULT 0,
-    followers INT DEFAULT 0,
-    following INT DEFAULT 0,
-
-    total_stars INT DEFAULT 0,
-    total_forks INT DEFAULT 0,
-
-    most_used_language VARCHAR(100),
-
-    account_age_days INT DEFAULT 0,
-
-    profile_url VARCHAR(500),
-    avatar_url VARCHAR(500),
-
-    analyzed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
+* GitHub Profile Comparison
+* Developer Benchmarking
+* Portfolio Growth Tracking
+* ATS Resume Matching
+* Interview Preparation Assistant
+* Team Portfolio Analysis
+* Open Source Contribution Analytics
 
 ---
 
-# Insights Calculated
+## Resume Highlights
 
-The API calculates:
+This project demonstrates:
 
-- Total stars
-- Total forks
-- Most used programming language
-- Public repository count
-- Followers count
-- Following count
-- Account age in days
-
----
-
-# Error Handling
-
-The API handles:
-
-- Invalid GitHub usernames
-- GitHub API rate limits
-- Database errors
-- Missing parameters
-- Route not found errors
+* REST API Design
+* Scalable Backend Architecture
+* Repository Pattern
+* Service Layer Architecture
+* Database Design
+* GitHub API Integration
+* AI Integration
+* Prompt Engineering
+* Data Analytics
+* Rule-Based Intelligence Systems
+* Software Design Principles
 
 ---
 
-# Deployment
+## Author
 
-Backend deployed using:
+**Sukumar Erugadindla**
 
-- Render
-
-Cloud Database:
-
-- Railway MySQL
+GitHub: https://github.com/Sukumar5705
 
 ---
 
-# Postman Collection
+## License
 
-The repository includes:
-
-```bash
-github-profile-analyzer-postman-collection.json
-```
-
----
-
-# Future Improvements
-
-- Swagger API documentation
-- GitHub scoring algorithm
-- Repository contribution analytics
-- Caching
-- Authentication
-- Rate limiting
-- Top starred repository analysis
-
----
-
-# Author
-
-Sukumar Erugadindla
-
-GitHub:
-https://github.com/Sukumar5705
-
----
-
-# License
-
-This project is developed for educational and assessment purposes.
+This project is developed for educational, portfolio, and research purposes.
