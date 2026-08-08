@@ -5,15 +5,7 @@ import type {
   DeveloperType,
   CareerScore,
 } from "@/types/api"
-
-/**
- * `Profile` as already defined in `@/types/api` only exposes the fields the
- * existing cards use (name, username, avatar_url, profile_url, bio,
- * public_repos). QuickFacts wants a few more raw GitHub fields — if
- * `Profile` already has them, this intersection is a harmless no-op;
- * otherwise it lets this file compile without editing the shared type.
- */
-
+import { Layers } from "lucide-react"
 
 interface QuickFactsCardProps {
   profile: Profile
@@ -26,8 +18,6 @@ interface FactDefinition {
   label: string
   value: string | null
 }
-
-
 
 function buildFacts(
   profile: Profile,
@@ -43,7 +33,7 @@ function buildFacts(
       label: "Followers",
       value: profile.followers != null ? profile.followers.toLocaleString() : null,
     },
-    { label: "Most Used Language", value: summary.mostUsedLanguage ?? null },
+    { label: "Top Language", value: summary.mostUsedLanguage ?? null },
     {
       label: "Total Stars",
       value: summary.totalStars != null ? summary.totalStars.toLocaleString() : null,
@@ -80,28 +70,35 @@ export function QuickFactsCard({
   )
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Quick Facts</CardTitle>
-        <p className="text-sm text-muted-foreground">At-a-glance cheat sheet</p>
+    <Card className="glass-card shadow-soft transition-all">
+      <CardHeader className="flex flex-row items-center justify-between pb-3">
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-purple-50 text-[#8B5CF6] border border-purple-100">
+            <Layers className="h-4 w-4" />
+          </div>
+          <div>
+            <CardTitle>Quick Facts Matrix</CardTitle>
+            <p className="text-xs text-[#64748B]">At-a-glance technical metrics summary</p>
+          </div>
+        </div>
       </CardHeader>
       <CardContent>
         {facts.length === 0 ? (
-          <p className="text-sm text-muted-foreground">No data available.</p>
+          <p className="text-xs text-[#64748B]">No data available.</p>
         ) : (
           <dl
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3"
             aria-label="Quick facts"
           >
             {facts.map((fact) => (
               <div
                 key={fact.label}
-                className="rounded-lg border border-border p-2.5 space-y-0.5"
+                className="rounded-xl border border-white/80 bg-white/50 p-3 space-y-0.5 shadow-sm"
               >
-                <dt className="text-[11px] font-medium text-muted-foreground uppercase tracking-wide truncate">
+                <dt className="text-[10px] font-bold text-[#64748B] uppercase tracking-wider truncate">
                   {fact.label}
                 </dt>
-                <dd className="text-sm font-semibold text-foreground truncate tabular-nums">
+                <dd className="text-sm font-extrabold text-[#141414] truncate tabular-nums">
                   {fact.value}
                 </dd>
               </div>

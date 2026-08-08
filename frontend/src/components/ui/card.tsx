@@ -5,7 +5,7 @@ function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
-        "rounded-xl border border-border bg-card text-card-foreground shadow-sm",
+        "glass-card text-card-foreground",
         className
       )}
       {...props}
@@ -21,13 +21,13 @@ function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement
 
 function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h3 className={cn("text-base font-semibold leading-none", className)} {...props} />
+    <h3 className={cn("text-base font-bold tracking-tight text-[#141414] leading-tight", className)} {...props} />
   )
 }
 
 function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p className={cn("text-sm text-gray-500", className)} {...props} />
+    <p className={cn("text-xs font-normal text-muted-foreground", className)} {...props} />
   )
 }
 
