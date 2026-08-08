@@ -3,10 +3,6 @@ import { NavLink, Outlet, useParams, useNavigate, Link, useLocation } from "reac
 import { ROUTES } from "../routes/paths"
 import {
   BarChart3,
-  Award,
-  Cpu,
-  Sparkles,
-  GitBranch,
   FileText,
   Compass,
   Briefcase,
@@ -182,8 +178,8 @@ export function DashboardLayout() {
                   key={item.label}
                   to={item.to}
                   className={`flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-all duration-150 ${active
-                      ? "bg-gradient-to-r from-[#036AFF] to-[#6366F1] text-white shadow-md shadow-blue-500/25"
-                      : "text-[#64748B] hover:text-[#141414] hover:bg-white/60"
+                    ? "bg-gradient-to-r from-[#036AFF] to-[#6366F1] text-white shadow-md shadow-blue-500/25"
+                    : "text-[#64748B] hover:text-[#141414] hover:bg-white/60"
                     }`}
                 >
                   <Icon className={`h-4 w-4 shrink-0 ${active ? "text-white" : "text-[#64748B]"}`} />
@@ -217,8 +213,8 @@ export function DashboardLayout() {
                   key={item.label}
                   to={item.to}
                   className={`flex items-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2 text-xs font-semibold ${active
-                      ? "bg-gradient-to-r from-[#036AFF] to-[#6366F1] text-white shadow-sm"
-                      : "bg-white/60 text-[#64748B] border border-white/70"
+                    ? "bg-gradient-to-r from-[#036AFF] to-[#6366F1] text-white shadow-sm"
+                    : "bg-white/60 text-[#64748B] border border-white/70"
                     }`}
                 >
                   <Icon className="h-3.5 w-3.5" />
