@@ -1,0 +1,75 @@
+{
+  "info": {
+    "name": "Developer Intelligence Platform v3",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "BASE_URL", "value": "http://localhost:5000" },
+    { "key": "USERNAME",  "value": "octocat" }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": { "method": "GET", "url": "{{BASE_URL}}/" }
+    },
+    {
+      "name": "── SPRINT 1 + 2 ──",
+      "item": [
+        {
+          "name": "Analyze Profile",
+          "request": { "method": "POST", "url": "{{BASE_URL}}/api/github/analyze/{{USERNAME}}" }
+        },
+        {
+          "name": "Get All Profiles",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{BASE_URL}}/api/github/profiles?page=1&limit=10",
+              "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "10" }]
+            }
+          }
+        },
+        {
+          "name": "Get Single Profile",
+          "request": { "method": "GET", "url": "{{BASE_URL}}/api/github/profiles/{{USERNAME}}" }
+        },
+        {
+          "name": "Search Profiles",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{BASE_URL}}/api/github/search?username={{USERNAME}}",
+              "query": [{ "key": "username", "value": "{{USERNAME}}" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Profile",
+          "request": { "method": "DELETE", "url": "{{BASE_URL}}/api/github/profiles/{{USERNAME}}" }
+        }
+      ]
+    },
+    {
+      "name": "── SPRINT 3 ──",
+      "item": [
+        {
+          "name": "Recruiter View",
+          "request": { "method": "GET", "url": "{{BASE_URL}}/api/recruiter/{{USERNAME}}" }
+        },
+        {
+          "name": "Score History",
+          "request": { "method": "GET", "url": "{{BASE_URL}}/api/recruiter/{{USERNAME}}/history" }
+        }
+      ]
+    },
+    {
+      "name": "── SPRINT 4 ──",
+      "item": [
+        {
+          "name": "Generate AI Report",
+          "request": { "method": "POST", "url": "{{BASE_URL}}/api/analysis/{{USERNAME}}/generate-ai" }
+        }
+      ]
+    }
+  ]
+}
