@@ -4,7 +4,6 @@ import { TrustBar } from "../components/landing/TrustBar"
 import { HowItWorksSection } from "../components/landing/HowItWorksSection"
 import { FeaturesSection } from "../components/landing/FeaturesSection"
 import { TechStackSection } from "../components/landing/TechStackSection"
-import { Footer } from "../components/shared/Footer"
 
 export function LandingPage() {
   return (
