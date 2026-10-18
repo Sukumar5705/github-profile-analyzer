@@ -1,70 +1,30 @@
 /**
  * HowItWorksStrip
  *
- * A minimal 3-step sequence that explains the product flow.
- * Placed directly below the search form to answer the implicit
- * question "what happens after I click analyze?"
+ * Compact one-line version of the workflow, for placing near the search form.
+ * NOTE: it is not currently rendered anywhere. It now reads its labels from
+ * HowItWorksSection so the two cannot disagree; delete this file if you don't
+ * plan to use it.
  *
- * Uses <ol> (ordered list) — steps are sequential, order matters.
- * Uses <li> for each step — correct semantic for list items.
- *
- * Layout:
- *   Mobile  → vertical stack (flex-col)
- *   Desktop → horizontal row with → separators (flex-row)
+ * Semantics: <ol>, because the steps are sequential.
+ * Layout: stacked on mobile, one row with arrows from sm up.
  */
-
-// ── Data ─────────────────────────────────────────────────────────────────────
-// Defined as a const array outside the component so it's not re-created
-// on every render. TypeScript infers the type from the object shape.
-const STEPS = [
-  {
-    number: "01",
-    label: "Paste your GitHub username",
-  },
-  {
-    number: "02",
-    label: "We analyze your public repos",
-  },
-  {
-    number: "03",
-    label: "Get your full intelligence report",
-  },
-] as const
-// `as const` makes every property readonly and narrows the literal types.
-// This means step.number is "01" | "02" | "03", not just string.
-// Useful if you ever switch on the value — TypeScript will warn if you
-// forget a case.
+import { HOW_IT_WORKS_STEPS } from "./HowItWorksSection"
 
 export function HowItWorksStrip() {
   return (
     <ol
       aria-label="How it works"
-      className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-0"
+      className="flex flex-col gap-2 text-sm text-slate-600 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3"
     >
-      {STEPS.map((step, index) => (
-        // React.Fragment with key — lets us return two sibling elements
-        // (the <li> and the → separator) from one map iteration without
-        // adding an unnecessary wrapper <div>.
-        <li
-          key={step.number}
-          className="flex items-center gap-2 sm:gap-2"
-        >
-          {/* Step number — monospace font signals "technical/sequential" */}
-          <span className="font-mono text-xs font-bold text-blue-500">
+      {HOW_IT_WORKS_STEPS.map((step, index) => (
+        <li key={step.number} className="flex items-center gap-2">
+          <span className="font-mono text-xs font-semibold text-primary">
             {step.number}
           </span>
-
-          {/* Step label */}
-          <span className="text-sm text-gray-500">{step.label}</span>
-
-          {/* Arrow separator — only between steps (not after the last),
-              only on sm+ (desktop). aria-hidden so screen readers skip it
-              — the <ol> order already communicates sequence. */}
-          {index < STEPS.length - 1 && (
-            <span
-              aria-hidden="true"
-              className="ml-2 hidden text-gray-300 sm:block"
-            >
+          <span>{step.shortLabel}</span>
+          {index < HOW_IT_WORKS_STEPS.length - 1 && (
+            <span aria-hidden="true" className="ml-1 hidden text-slate-300 sm:inline">
               →
             </span>
           )}

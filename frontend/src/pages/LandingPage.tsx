@@ -9,7 +9,7 @@ import { Footer } from "../components/shared/Footer"
 export function LandingPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col selection:bg-blue-100 selection:text-blue-900">
-      
+
       {/* Top sticky navigation */}
       <Navbar />
 
@@ -22,8 +22,7 @@ export function LandingPage() {
         <TechStackSection />
       </main>
 
-      {/* Modern footer */}
-      <Footer />
+
 
     </div>
   )

@@ -1,98 +1,86 @@
-import { GitBranch, BrainCircuit, LineChart } from "lucide-react"
-
-const STEPS = [
+/**
+ * HowItWorksSection — the one place the workflow is explained.
+ *
+ * HowItWorksStrip reuses HOW_IT_WORKS_STEPS so the two can never drift apart.
+ * Detail lines describe what the pipeline actually does (repository metadata,
+ * READMEs, language/topic signals, LLM evaluation).
+ */
+export const HOW_IT_WORKS_STEPS = [
   {
-    step: "Step 01",
-    title: "Connect GitHub",
-    description: "Analyze any public GitHub profile instantly without auth or permissions.",
-    icon: GitBranch,
-    details: ["Public repos ingestion", "Zero credentials required", "Instant fetch"],
+    number: "01",
+    title: "Enter a GitHub username",
+    shortLabel: "Paste your GitHub username",
+    description:
+      "Analyze any public GitHub profile without signing in or granting permissions.",
+    details: ["Public repositories only", "No credentials required"],
   },
   {
-    step: "Step 02",
-    title: "AI Understands Your Portfolio",
-    description: "Evaluate repositories, technologies, documentation, project quality, architecture, deployment, and engineering patterns.",
-    icon: BrainCircuit,
-    details: ["AST & Language parsing", "Commit & PR pattern scoring", "Architectural depth check"],
+    number: "02",
+    title: "AI reviews your portfolio",
+    shortLabel: "We analyze your public repos",
+    description:
+      "Repositories, technologies, documentation and project quality are scored, and the strongest projects are evaluated in depth.",
+    details: [
+      "Language and topic signals",
+      "README and documentation review",
+      "Project selection and scoring",
+    ],
   },
   {
-    step: "Step 03",
-    title: "Receive Developer Intelligence",
-    description: "Generate recruiter insights, career score, portfolio analysis, resume evidence, and an AI-powered career roadmap.",
-    icon: LineChart,
-    details: ["Quantified Career Score", "Archetype & Skill extraction", "Personalized 3-month roadmap"],
+    number: "03",
+    title: "Receive your report",
+    shortLabel: "Get your full intelligence report",
+    description:
+      "Get recruiter insights, a career score, portfolio analysis, resume evidence and an AI-generated career roadmap.",
+    details: ["Career score", "Developer type and skills", "Roadmap and recommendations"],
   },
-]
+] as const
 
 export function HowItWorksSection() {
   return (
-    <section 
-      id="how-it-works" 
-      aria-label="How DevIntel Works" 
-      className="py-20 sm:py-28 bg-[#F8FAFC] border-b border-[#E2E8F0]"
+    <section
+      id="how-it-works"
+      aria-labelledby="how-it-works-heading"
+      className="scroll-mt-20 bg-slate-50 py-16 sm:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 ring-1 ring-inset ring-blue-600/20 mb-3">
-            <span>Execution Pipeline</span>
-          </div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-[#0F172A] sm:text-4xl">
-            How DevIntel Analyzes Your Code
+        <div className="max-w-2xl">
+          <h2
+            id="how-it-works-heading"
+            className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl"
+          >
+            How DevIntel analyzes your code
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-[#64748B]">
-            From raw commits to structured developer intelligence in three streamlined stages.
+          <p className="mt-3 text-base leading-relaxed text-slate-600">
+            From public repositories to a structured report in three steps.
           </p>
         </div>
 
-        {/* 3-Step Horizontal Timeline Grid */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3 relative">
-          
-          {STEPS.map((item) => {
-            const Icon = item.icon
-            return (
-              <div
-                key={item.step}
-                className="relative flex flex-col justify-between rounded-2xl border border-[#E2E8F0] bg-white p-7 shadow-card hover:shadow-card-hover transition-all duration-200"
-              >
-                {/* Step pill + Icon */}
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">
-                      {item.step}
+        <ol className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+          {HOW_IT_WORKS_STEPS.map((step) => (
+            <li key={step.number} className="border-t-2 border-slate-900 pt-5">
+              <span className="font-mono text-sm font-semibold text-primary">
+                {step.number}
+              </span>
+              <h3 className="mt-2 text-lg font-semibold text-slate-900">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-base leading-relaxed text-slate-600">
+                {step.description}
+              </p>
+              <ul className="mt-4 space-y-1.5 text-sm text-slate-600">
+                {step.details.map((detail) => (
+                  <li key={detail} className="flex gap-2">
+                    <span aria-hidden="true" className="select-none text-slate-400">
+                      –
                     </span>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-white shadow-sm">
-                      <Icon className="h-5 w-5 text-blue-400" />
-                    </div>
-                  </div>
-
-                  <h3 className="text-lg font-bold text-[#0F172A]">
-                    {item.title}
-                  </h3>
-                  
-                  <p className="mt-2.5 text-sm leading-relaxed text-[#64748B]">
-                    {item.description}
-                  </p>
-                </div>
-
-                {/* Micro tags */}
-                <div className="mt-6 pt-5 border-t border-slate-100 flex flex-wrap gap-1.5">
-                  {item.details.map((detail) => (
-                    <span
-                      key={detail}
-                      className="rounded bg-slate-50 border border-slate-200/60 px-2 py-0.5 text-[11px] font-medium text-slate-600"
-                    >
-                      {detail}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )
-          })}
-
-        </div>
-
+                    {detail}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   )

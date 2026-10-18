@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { ROUTES } from "../../routes/paths"
-import { Terminal, ArrowRight, Menu, X, Sparkles } from "lucide-react"
+import { ArrowRight, Menu, X, Sparkles } from "lucide-react"
+import logo from '../../../public/image.png'
 
 function GithubIcon({ className = "h-4 w-4" }: { className?: string }) {
   return (
@@ -38,18 +39,19 @@ export function Navbar() {
             className="group flex items-center gap-2.5 text-[#0F172A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-lg p-1"
           >
             {/* GitHub-inspired Terminal Icon */}
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0F172A] text-white shadow-sm transition-transform duration-200 group-hover:scale-105">
-              <Terminal className="h-4.5 w-4.5 text-blue-400" />
-            </div>
-            
+            <img
+              src={logo}
+              alt="DevIntel Logo"
+              aria-hidden="true"
+              className="h-10 w-10 shrink-0 object-contain"
+            />
+
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
                 <span className="text-base font-bold tracking-tight text-[#0F172A]">
                   DevIntel
                 </span>
-                <span className="hidden sm:inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
-                  v3.0
-                </span>
+
               </div>
               <span className="hidden text-[11px] font-normal text-[#64748B] lg:inline-block leading-none mt-0.5">
                 Developer Intelligence Platform

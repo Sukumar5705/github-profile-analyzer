@@ -4,7 +4,7 @@ import logger from '../utils/logger.js';
 import { GEMINI_RESPONSE_SCHEMA } from '../validation/analysisResponseSchema.js';
 
 const DEFAULT_MODEL = 'gemini-2.5-flash';
-const FALLBACK_MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+const FALLBACK_MODELS = ['gemini-3.8-flash', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
 
 const geminiClient = axios.create({ timeout: 60000 });
 

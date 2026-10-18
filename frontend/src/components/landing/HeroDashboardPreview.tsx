@@ -1,15 +1,11 @@
 import { useState } from "react"
-import { 
-  Award, 
-  GitFork, 
-  Star, 
-  CheckCircle2, 
-  Layers, 
-  Sparkles, 
-  ShieldCheck, 
-  Code2,
-  Cpu
-} from "lucide-react"
+import { GitFork, Star } from "lucide-react"
+
+/**
+ * Static, illustrative sample of the report. The figures below are demo data
+ * for layout purposes — they are not live or verified results, and the UI
+ * says so.
+ */
 
 interface DemoProfile {
   username: string
@@ -85,7 +81,7 @@ const DEMO_PROFILES: Record<string, DemoProfile> = {
       { metric: "Code Architecture", score: 99 },
       { metric: "Engineering Consistency", score: 98 },
       { metric: "Documentation", score: 92 },
-    ]
+    ],
   },
   gaearon: {
     username: "gaearon",
@@ -124,7 +120,7 @@ const DEMO_PROFILES: Record<string, DemoProfile> = {
       { metric: "Documentation Clarity", score: 99 },
       { metric: "Test Suite Health", score: 97 },
       { metric: "Design Simplicity", score: 96 },
-    ]
+    ],
   },
   sindresorhus: {
     username: "sindresorhus",
@@ -163,8 +159,18 @@ const DEMO_PROFILES: Record<string, DemoProfile> = {
       { metric: "Packaging & CI/CD", score: 99 },
       { metric: "Ecosystem Impact", score: 100 },
       { metric: "API Usability", score: 95 },
-    ]
-  }
+    ],
+  },
+}
+
+const PROFILE_KEYS = Object.keys(DEMO_PROFILES)
+
+function SectionLabel({ children }: { children: string }) {
+  return (
+    <h4 className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+      {children}
+    </h4>
+  )
 }
 
 export function HeroDashboardPreview() {
@@ -172,197 +178,170 @@ export function HeroDashboardPreview() {
   const current = DEMO_PROFILES[selectedKey]
 
   return (
-    <div className="relative w-full max-w-2xl mx-auto lg:max-w-none">
-      {/* Decorative ambient background blur behind the floating card */}
-      <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-tr from-blue-500/10 via-slate-200/50 to-indigo-500/10 blur-xl opacity-80" />
+    <figure className="w-full" aria-label="Sample report preview">
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg shadow-slate-900/5">
+        {/* Header: what this is + profile switcher */}
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-slate-200 bg-slate-50 px-5 py-3">
+          <p className="text-xs font-medium text-slate-600">
+            Sample report <span className="text-slate-400">·</span>{" "}
+            <span className="text-slate-500">illustrative data</span>
+          </p>
 
-      {/* Main Glass/SaaS Frame */}
-      <div className="relative rounded-2xl border border-[#E2E8F0] bg-white p-5 sm:p-6 shadow-floating transition-all duration-300">
-        
-        {/* Top Control Bar: Tab selector simulating real profile switching */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E2E8F0] pb-4">
-          <div className="flex items-center gap-2">
-            <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-50" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#64748B]">
-              Live Intelligence Engine
-            </span>
-          </div>
-
-          {/* Interactive Profile Switcher Tabs */}
-          <div className="flex items-center rounded-lg bg-slate-100 p-1">
-            {Object.keys(DEMO_PROFILES).map((key) => {
-              const profile = DEMO_PROFILES[key]
+          <div role="tablist" aria-label="Sample profiles" className="flex gap-1">
+            {PROFILE_KEYS.map((key) => {
               const isActive = selectedKey === key
               return (
                 <button
                   key={key}
+                  id={`sample-tab-${key}`}
                   type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls="sample-report-panel"
                   onClick={() => setSelectedKey(key)}
-                  className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition-all cursor-pointer ${
+                  className={`cursor-pointer rounded-md px-2.5 py-1.5 font-mono text-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     isActive
-                      ? "bg-white text-[#0F172A] shadow-sm font-semibold"
-                      : "text-[#64748B] hover:text-[#0F172A]"
+                      ? "bg-white font-semibold text-slate-900 shadow-sm ring-1 ring-slate-200"
+                      : "text-slate-500 hover:text-slate-900"
                   }`}
                 >
-                  <img
-                    src={profile.avatar}
-                    alt={profile.username}
-                    className="h-3.5 w-3.5 rounded-full object-cover"
-                  />
-                  <span>@{profile.username}</span>
+                  @{key}
                 </button>
               )
             })}
           </div>
         </div>
 
-        {/* Profile Header Row */}
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img
-              src={current.avatar}
-              alt={current.name}
-              className="h-12 w-12 rounded-xl border border-[#E2E8F0] object-cover shadow-sm"
-            />
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-base font-bold text-[#0F172A]">
+        <div
+          id="sample-report-panel"
+          role="tabpanel"
+          aria-labelledby={`sample-tab-${selectedKey}`}
+        >
+          {/* Identity + verdict */}
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-5">
+            <div className="flex min-w-0 items-center gap-3">
+              <img
+                src={current.avatar}
+                alt=""
+                width={44}
+                height={44}
+                className="h-11 w-11 shrink-0 rounded-full bg-slate-100 object-cover"
+              />
+              <div className="min-w-0">
+                <p className="truncate text-base font-semibold text-slate-900">
                   {current.name}
-                </h3>
-                <span className="text-xs text-[#64748B] font-mono">
-                  @{current.username}
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 mt-0.5">
-                <span className="inline-flex items-center gap-1 rounded-md bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
-                  <Cpu className="h-3 w-3" />
+                </p>
+                <p className="truncate text-sm text-slate-600">
                   {current.developerType}
-                </span>
-                <span className="text-[11px] font-medium text-emerald-600">
-                  {current.typeConfidence}% confidence
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Recruiter Verdict Badge */}
-          <div className="flex flex-col items-end">
-            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
-              <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
-              {current.recruiterVerdict.decision}
-            </span>
-            <span className="mt-1 text-[11px] text-[#64748B]">
-              Signal: {current.recruiterVerdict.signal}
-            </span>
-          </div>
-        </div>
-
-        {/* Grid of Intelligence Widgets */}
-        <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
-          
-          {/* Card 1: Career Score */}
-          <div className="rounded-xl border border-[#E2E8F0] bg-slate-50/70 p-3.5 flex flex-col justify-between">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-[#64748B]">Career Score</span>
-              <Award className="h-4 w-4 text-blue-600" />
-            </div>
-            <div className="my-2 flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold tracking-tight text-[#0F172A]">
-                {current.careerScore}
-              </span>
-              <span className="text-xs font-medium text-[#64748B]">/100</span>
-            </div>
-            <div className="space-y-1">
-              <div className="flex justify-between text-[11px] text-[#64748B]">
-                <span>Percentile</span>
-                <span className="font-semibold text-blue-600">{current.scoreRank}</span>
-              </div>
-              <div className="h-1.5 w-full rounded-full bg-slate-200 overflow-hidden">
-                <div 
-                  className="h-full rounded-full bg-blue-600 transition-all duration-500"
-                  style={{ width: `${current.careerScore}%` }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: Skill Confidence Extract */}
-          <div className="sm:col-span-2 rounded-xl border border-[#E2E8F0] bg-slate-50/70 p-3.5 flex flex-col justify-between">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-[#64748B]">Technical Skill Confidence</span>
-              <Code2 className="h-4 w-4 text-slate-500" />
-            </div>
-            <div className="mt-2 grid grid-cols-2 gap-2">
-              {current.topSkills.map((skill) => (
-                <div
-                  key={skill.name}
-                  className="flex items-center justify-between rounded-lg bg-white px-2.5 py-1.5 border border-slate-200/80 shadow-subtle"
-                >
-                  <span className="text-xs font-medium text-[#0F172A] truncate">
-                    {skill.name}
+                  <span className="text-slate-400"> · </span>
+                  <span className="font-mono text-xs text-slate-500">
+                    {current.typeConfidence}% match
                   </span>
-                  <span className="text-[11px] font-semibold text-blue-600 font-mono">
-                    {skill.confidence}%
-                  </span>
+                </p>
+              </div>
+            </div>
+
+            <div className="sm:text-right">
+              <p className="text-xs text-slate-500">Recruiter verdict</p>
+              <p className="text-sm font-semibold text-slate-900">
+                {current.recruiterVerdict.decision}
+              </p>
+            </div>
+          </div>
+
+          {/* Score + breakdown */}
+          <div className="grid gap-6 border-t border-slate-200 px-5 py-5 sm:grid-cols-[9rem_1fr] sm:gap-8">
+            <div>
+              <SectionLabel>Career score</SectionLabel>
+              <p className="mt-2 flex items-baseline gap-1">
+                <span className="text-5xl font-bold tabular-nums tracking-tight text-slate-900">
+                  {current.careerScore}
+                </span>
+                <span className="text-sm text-slate-500">/ 100</span>
+              </p>
+            </div>
+
+            <dl className="space-y-2.5 self-center">
+              {current.scoreBreakdown.map((item) => (
+                <div key={item.label} className="grid grid-cols-[6.5rem_1fr_2rem] items-center gap-3">
+                  <dt className="text-sm text-slate-600">{item.label}</dt>
+                  <dd className="contents">
+                    <span className="h-1.5 overflow-hidden rounded-full bg-slate-100" aria-hidden="true">
+                      <span
+                        className="block h-full rounded-full bg-primary transition-[width] duration-500 motion-reduce:transition-none"
+                        style={{ width: `${item.value}%` }}
+                      />
+                    </span>
+                    <span className="text-right font-mono text-sm tabular-nums text-slate-900">
+                      {item.value}
+                    </span>
+                  </dd>
                 </div>
               ))}
+            </dl>
+          </div>
+
+          {/* Skills */}
+          <div className="border-t border-slate-200 px-5 py-5">
+            <SectionLabel>Skills · confidence</SectionLabel>
+            <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+              {current.topSkills.map((skill) => (
+                <li key={skill.name} className="flex items-baseline justify-between gap-3 text-sm">
+                  <span className="truncate text-slate-900">{skill.name}</span>
+                  <span className="shrink-0 font-mono text-sm tabular-nums text-slate-600">
+                    {skill.confidence}%
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Repository evidence */}
+          <div className="border-t border-slate-200 px-5 py-5">
+            <SectionLabel>Top repository</SectionLabel>
+            <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <p className="text-sm text-slate-900">
+                <span className="font-mono font-semibold">{current.topProject.name}</span>
+                <span className="text-slate-400"> · </span>
+                <span className="text-slate-600">{current.topProject.primaryLang}</span>
+              </p>
+              <p className="flex items-center gap-4 text-sm text-slate-600">
+                <span className="inline-flex items-center gap-1">
+                  <Star className="h-3.5 w-3.5" aria-hidden="true" />
+                  <span className="sr-only">Stars:</span>
+                  {current.topProject.stars}
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <GitFork className="h-3.5 w-3.5" aria-hidden="true" />
+                  <span className="sr-only">Forks:</span>
+                  {current.topProject.forks}
+                </span>
+              </p>
             </div>
+            <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
+              {current.topProject.description}
+            </p>
+            <p className="mt-1.5 text-xs text-slate-500">
+              Architecture: {current.topProject.architecture}
+            </p>
           </div>
 
-        </div>
-
-        {/* Card 3: Top Portfolio Project & Architecture Evidence */}
-        <div className="mt-3 rounded-xl border border-[#E2E8F0] bg-white p-3.5 shadow-subtle">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Layers className="h-4 w-4 text-blue-600" />
-              <span className="text-xs font-bold text-[#0F172A]">
-                Top Repository: {current.topProject.name}
-              </span>
-              <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium text-[#64748B]">
-                {current.topProject.primaryLang}
-              </span>
-            </div>
-            <div className="flex items-center gap-3 text-xs text-[#64748B]">
-              <span className="flex items-center gap-1">
-                <Star className="h-3 w-3 text-amber-500 fill-amber-400" />
-                {current.topProject.stars}
-              </span>
-              <span className="flex items-center gap-1">
-                <GitFork className="h-3 w-3 text-slate-400" />
-                {current.topProject.forks}
-              </span>
-            </div>
-          </div>
-
-          <p className="mt-1.5 text-xs text-[#64748B] line-clamp-2 leading-relaxed">
-            {current.topProject.description}
-          </p>
-
-          <div className="mt-2 flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100 text-[11px] text-[#64748B]">
-            <span className="font-semibold text-slate-700">Architecture:</span>
-            <span className="rounded bg-blue-50 px-2 py-0.5 font-medium text-blue-700">
-              {current.topProject.architecture}
-            </span>
-            <span className="ml-auto inline-flex items-center gap-1 text-emerald-600 font-medium">
-              <CheckCircle2 className="h-3 w-3" />
-              Verified Public Code
-            </span>
+          {/* Summary */}
+          <div className="border-t border-slate-200 bg-slate-50 px-5 py-4">
+            <p className="text-sm leading-relaxed text-slate-700">
+              {current.recruiterVerdict.summary}
+            </p>
+            <p className="mt-1.5 text-xs text-slate-500">
+              Signal: {current.recruiterVerdict.signal}
+            </p>
           </div>
         </div>
-
-        {/* Bottom AI Executive Summary Strip */}
-        <div className="mt-3 rounded-xl bg-slate-900 p-3.5 text-white">
-          <div className="flex items-center gap-2 text-xs font-semibold text-blue-400">
-            <Sparkles className="h-3.5 w-3.5" />
-            <span>AI Recruiter & Engineering Insight</span>
-          </div>
-          <p className="mt-1 text-xs text-slate-300 leading-relaxed">
-            "{current.recruiterVerdict.summary}"
-          </p>
-        </div>
-
       </div>
-    </div>
+
+      <figcaption className="mt-3 text-xs text-slate-500">
+        Example output for well-known public profiles. Your report is generated
+        from your own repositories.
+      </figcaption>
+    </figure>
   )
 }

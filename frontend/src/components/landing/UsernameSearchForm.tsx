@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react"
 import { useNavigate } from "react-router-dom"
 import { ROUTES } from "../../routes/paths"
-import { Search, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 const SUGGESTED_PROFILES = [
   { username: "torvalds", label: "torvalds", title: "Linux & Git Creator" },
@@ -44,25 +44,26 @@ export function UsernameSearchForm() {
   const hasError = validationError !== null
 
   return (
-    <div className="w-full">
-      {/* ── Main Input Card ───────────────────────────────────────── */}
-      <form onSubmit={handleSubmit} noValidate className="relative">
+    <form onSubmit={handleSubmit} noValidate aria-label="Analyze a GitHub profile">
+      <label htmlFor="github-username-input" className="sr-only">
+        GitHub username
+      </label>
+
+      <div className="flex flex-col gap-3 sm:flex-row">
+        {/* Field: the fixed prefix and the input read as one URL */}
         <div
-          className={`group relative flex flex-col sm:flex-row items-stretch sm:items-center rounded-2xl border bg-white p-2 transition-all duration-200 shadow-card ${
+          className={`flex h-12 w-full min-w-0 items-center sm:flex-1 rounded-lg border bg-white px-3.5 transition-colors ${
             hasError
-              ? "border-red-300 ring-4 ring-red-50/70"
-              : "border-[#E2E8F0] hover:border-slate-300 focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-100"
+              ? "border-red-500 focus-within:ring-4 focus-within:ring-red-100"
+              : "border-slate-300 hover:border-slate-400 focus-within:border-primary focus-within:ring-4 focus-within:ring-primary/15"
           }`}
         >
-          {/* Left search icon & prefix */}
-          <div className="flex items-center pl-3.5 pr-1 py-2 sm:py-0 text-[#64748B]">
-            <Search className="h-5 w-5 text-slate-400 group-focus-within:text-blue-600 transition-colors" />
-            <span className="ml-2 font-mono text-sm text-slate-400 select-none">
-              github.com/
-            </span>
-          </div>
-
-          {/* Text Input */}
+          <span
+            aria-hidden="true"
+            className="select-none font-mono text-sm text-slate-500"
+          >
+            github.com/
+          </span>
           <input
             id="github-username-input"
             type="text"
@@ -71,59 +72,57 @@ export function UsernameSearchForm() {
               setUsername(e.target.value)
               if (validationError) setValidationError(null)
             }}
-            placeholder="Enter GitHub username..."
+            placeholder="username"
             autoComplete="off"
             autoCapitalize="none"
             autoCorrect="off"
             spellCheck={false}
-            aria-label="GitHub username to analyze"
-            aria-describedby={hasError ? "search-error" : undefined}
+            aria-describedby={hasError ? "search-error" : "search-hint"}
             aria-invalid={hasError}
-            className="min-w-0 flex-1 bg-transparent px-2 py-2.5 font-mono text-sm sm:text-base font-medium text-[#0F172A] placeholder:text-slate-400 placeholder:font-sans focus:outline-none"
+            className="h-full min-w-0 flex-1 bg-transparent pl-0.5 font-mono text-base font-medium text-slate-900 placeholder:font-mono placeholder:font-normal placeholder:text-slate-400 focus:outline-none"
           />
-
-          {/* Primary Action Button */}
-          <button
-            type="submit"
-            disabled={!username.trim()}
-            aria-label="Analyze Profile"
-            className="mt-2 sm:mt-0 inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-[#1D4ED8] hover:shadow active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
-          >
-            <span>Analyze Profile</span>
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </button>
         </div>
 
-        {/* Inline Validation Error */}
-        {hasError && (
-          <div
-            id="search-error"
-            role="alert"
-            className="mt-3 flex items-center gap-2 rounded-xl bg-red-50 px-4 py-2.5 text-sm text-red-700 border border-red-200"
-          >
-            <span>{validationError}</span>
-          </div>
-        )}
-      </form>
-
-      {/* Suggested Profiles Pill Row */}
-      <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-[#64748B]">
-        <span className="font-medium text-slate-500">Explore with:</span>
-        <div className="flex flex-wrap items-center gap-1.5">
-          {SUGGESTED_PROFILES.map((profile) => (
-            <button
-              key={profile.username}
-              type="button"
-              onClick={() => handleProfileClick(profile.username)}
-              title={profile.title}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[#E2E8F0] bg-white px-2.5 py-1 text-xs font-mono text-slate-700 shadow-subtle transition-all hover:border-blue-300 hover:bg-blue-50/50 hover:text-blue-700 active:scale-95 cursor-pointer"
-            >
-              <span>{profile.label}</span>
-              <span className="text-[10px] text-slate-400">↵</span>
-            </button>
-          ))}
-        </div>
+        <button
+          type="submit"
+          disabled={!username.trim()}
+          className="inline-flex h-12 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-white transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-slate-300"
+        >
+          Analyze profile
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </button>
       </div>
-    </div>
+
+      {/* One line under the field: hint by default, error when invalid */}
+      {hasError ? (
+        <p
+          id="search-error"
+          role="alert"
+          className="mt-2.5 text-sm font-medium text-red-700"
+        >
+          {validationError}
+        </p>
+      ) : (
+        <p id="search-hint" className="mt-2.5 text-sm text-slate-500">
+          Enter any public GitHub username.
+        </p>
+      )}
+
+      {/* Examples */}
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+        <span className="text-slate-500">Try</span>
+        {SUGGESTED_PROFILES.map((profile) => (
+          <button
+            key={profile.username}
+            type="button"
+            onClick={() => handleProfileClick(profile.username)}
+            title={profile.title}
+            className="-mx-1 cursor-pointer rounded px-1 py-1.5 font-mono text-slate-700 underline decoration-slate-300 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            {profile.label}
+          </button>
+        ))}
+      </div>
+    </form>
   )
 }
